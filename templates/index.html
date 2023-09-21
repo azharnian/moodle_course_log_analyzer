@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheating Analyst</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 100px;
+            margin-bottom: 50px;
+        }
+
+        .result {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid;
+            padding: 10px;
+        }
+        th {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left form-input">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.csv(class="form-file") }}
+
+                {% if form.csv.errors %}
+                    {% for error in form.csv.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+
+                {{ form.submit(class="btn") }}
+            </form>
+        </div>
+        <div class="right result">
+            {% if result %}
+                {{ result | safe }}
+            {% endif %}
+
+            {% if analysis %}
+                {{ analysis | safe }}
+            {% endif %}
+        </div>
+    </div>
+</body>
+<script>
+    if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+</html>
